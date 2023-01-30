@@ -5,7 +5,21 @@ import { prisma} from "../../database/prismaClient"
 
 export class FindAllPostsUseCase {
     async execute (){
-        const Posts = await prisma.box_tv.findMany();
+        const Posts = await prisma.equipments.findMany(
+            {include:{
+                Imagens:{
+
+                    select:{
+                        image:true,
+                        typed:true
+                    }
+                    
+                }
+            }
+
+                
+            }
+        );
 
         return(Posts);
     }

@@ -6,12 +6,8 @@ class ImporTvBoxControllers{
     handle(request:Request, response:Response):Response {
 
         const file = request.file as Express.Multer.File;
-
-
-
-        const {serial, description, destination, batch} = request.body;
-        
-        this.importNewsImgsUseCase.execute({serial, description, destination, batch},file);
+        const {serial, description, batch, model_id} = request.body
+        this.importNewsImgsUseCase.execute({serial,description,model_id,batch},file);
 
         return response.send(); //retorna 200 
 

@@ -2,23 +2,33 @@ import {prisma} from '../../database/prismaClient'
 interface ICreateTvBox{
     serial: string;
     description: string;
-    destination:string;
+    model_id:string;
     batch:string;
+
 }
 
 class UpdateTvBoxUseCase{
-    async  execute(idImg:string,{serial,description,destination,batch}:ICreateTvBox,file:Express.Multer.File){
-          const find = await prisma.box_tv.update({
+    async  execute(idImg:string,{serial,description,model_id,batch}:ICreateTvBox,file:Express.Multer.File){
+        const tipo = "before"
+          const find = await prisma.equipments.update({
             where: {
                 id: idImg,
             },
             data:{
                 serial,
                 description,
-                destination,
                 batch,
-                fileName: file.filename
+                model:model_id,
+                
+            Imagens:{
+                create:{
+                    image:file.filename,
+                    typed:tipo
+
+        
+                }}
             }
+            
           })
 
             return(find);

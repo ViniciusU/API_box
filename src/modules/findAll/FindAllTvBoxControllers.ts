@@ -16,9 +16,17 @@ export class FindAllPostsController{
 
      posts.forEach( element => {
         
-          var imageAsBase64 = fs.readFileSync('C:\\Users\\vinig\\OneDrive\\Área de Trabalho\\app\\back\\tmp\\' + element.fileName, 'base64');
-           element.fileName = imageAsBase64;
+          //var imageAsBase64 = fs.readFileSync('C:\\Users\\vinig\\OneDrive\\Área de Trabalho\\app\\back\\tmp\\' + element.fileName, 'base64');
+          /// element.Imagens. = imageAsBase64;
+          
+          const image = element.Imagens.find(({ typed }) =>  typed === "before");
+          var imageAsBase64 = fs.readFileSync('C:\\Users\\vinig\\OneDrive\\Área de Trabalho\\app\\back\\tmp\\' + image?.image, 'base64');
+          element.Imagens = imageAsBase64;
+          
         });
+
+        
+
 
       
 

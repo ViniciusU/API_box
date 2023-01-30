@@ -19,7 +19,8 @@ export class FindPostsController{
     
 
         var imageAsBase64 = fs.readFileSync('C:\\Users\\vinig\\OneDrive\\Área de Trabalho\\app\\back\\tmp\\' + posts.fileName, 'base64');
-        posts.fileName = imageAsBase64;
+         posts.fileName = imageAsBase64;
+
     
 
       

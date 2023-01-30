@@ -10,16 +10,56 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model box_tv{
+model Equipments{
   id       String @id @default(uuid())
   serial String
   description String
-  destination String
   batch String
-  fileName String
+  model String
+  Category     Category     @relation(fields: [model], references: [id])
+  mischaracterize mischaracterize[]
+  Imagens Imagens[]
   created_at     DateTime    @default(now())
-  @@map("box_tv")
+  @@map("equipments")
 }
+
+model mischaracterize {
+  id       String @id @default(uuid())
+  equipment_id String 
+  destination String?
+  resourcesComplement String
+  state String
+  long String
+  lat String
+  equipment     Equipments?      @relation(fields: [equipment_id], references: [id])
+
+  updateDate DateTime
+  @@map("mischaracterize")
+}
+
+model Imagens{
+  id       String @id @default(uuid())
+  image  String
+  typed String
+  equipment_id String 
+  equipment     Equipments?      @relation(fields: [equipment_id], references: [id])
+ 
+
+  @@map("imagens")
+  
+}
+
+model Category {
+
+  id       String @id @default(uuid())
+  type  String
+  model String
+  Equipments Equipments[]
+  
+
+  @@map("category")
+}
+
 
 model Admin{
 
@@ -30,4 +70,10 @@ model Admin{
   @@map("admin")
  
 }
+
+
+
+
+
+
 
